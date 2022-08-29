@@ -1,0 +1,24 @@
+
+version: 2
+
+sources:
+  - name: ecommerce
+    # description: TODO
+    # loaded_at_field: TODO
+
+    loader: manual
+
+    # TODO: Make this an env var?
+    database: jaffle_shop_raw
+    schema: jaffle_shop
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: customers
+      - name: orders
+      - name: order_items
+      - name: locations
+      - name: products
