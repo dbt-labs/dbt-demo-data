@@ -16,7 +16,7 @@ renamed as (
         name as product_name,
         type as product_type,
         description as product_description,
-        price as product_price,
+        (price / 100.0)::float as product_price,
 
 
         ---------- derived

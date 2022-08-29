@@ -15,8 +15,8 @@ renamed as (
         customer_id,
 
         ---------- properties
-        order_total,
-        tax_paid,
+        (order_total / 100.0)::float as order_total,
+        (tax_paid / 100.0)::float as tax_paid,
 
         ---------- timestamps
         ordered_at
