@@ -36,11 +36,15 @@ joined as (
     select
         customers.*,
         order_summary.count_lifetime_orders,
-        order_summary.is_repeat_buyer,
         order_summary.first_ordered_at,
         order_summary.last_ordered_at,
         order_summary.lifetime_spend_pretax,
-        order_summary.lifetime_spend
+        order_summary.lifetime_spend,
+
+        case
+            when order_summary.is_repeat_buyer then 'returning'
+            else 'new'
+        end as customer_type
 
     from customers
     join order_summary using (customer_id)

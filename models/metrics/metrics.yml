@@ -15,9 +15,6 @@ metrics:
 
     dimensions:
       - location_name
-      - is_first_order
-      - is_food_order
-      - is_drink_order
 
   - name: customers
     label: Customers
@@ -32,6 +29,3 @@ metrics:
 
     dimensions:
       - location_name
-      - is_first_order
-      - is_food_order
-      - is_drink_order
