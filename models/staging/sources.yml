@@ -3,22 +3,20 @@ version: 2
 
 sources:
   - name: ecommerce
-    # description: TODO
-    # loaded_at_field: TODO
+    description: E-commerce data
 
+    database: '{{ env_var("DBT_DEMO_DATABASE", "DBT_DEMO_DATA") }}'
+    schema: '{{ env_var("DBT_DEMO_SCHEMA", "ECOMMERCE") }}'
     loader: manual
-
-    # TODO: Make this an env var?
-    database: jaffle_shop_raw
-    schema: jaffle_shop
-
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 48, period: hour}
 
     tables:
       - name: customers
+        description: One record per person who has purchased one or more items
       - name: orders
+        description: One record per order (consisting of one or more order items)
       - name: order_items
+        description: Items included in an order
       - name: locations
+        description: One record per physical store location
       - name: products
+        description: One record per SKU for items sold in stores
