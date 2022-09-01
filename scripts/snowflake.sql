@@ -1,6 +1,11 @@
 ---------------------------------------------------------------------
 -- CONFIGURATION:
+--
 -- Change the values below to configure where source data is loaded
+--
+-- NOTE: Do not change these variables if you intend to run this dbt
+--       project in dbt Cloud. Support for custom source data locations
+--       will be added in a future release
 ---------------------------------------------------------------------
 
 set DEST_DATABASE_NAME='dbt_demo_data';
