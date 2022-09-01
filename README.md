@@ -3,6 +3,9 @@
 This repository contains demo data and a starter project intended
 for use with [dbt](www.getdbt.com).
 
+> :warning: **This repo is a work-in-progress**: Best to come back sometime soon :)
+
+
 ### Installing source data
 
 In order to use this demo dbt project, you must manually import data
