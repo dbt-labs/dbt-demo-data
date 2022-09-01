@@ -52,8 +52,8 @@ create or replace external table orders (
   location_id string as (value:store_id::string),
   customer_id string as (value:customer::string),
   ordered_at timestamp as (value:ordered_at::timestamp),
-  order_total int as ((value:order_total::float * 100)::int),
-  tax_paid int as ((value:tax_paid::float * 100)::int)
+  order_total int as (value:order_total::int),
+  tax_paid int as (value:tax_paid::int)
 )
 with location = @s3_stage/orders
 file_format = ( type = parquet );
@@ -92,7 +92,7 @@ create or replace external table products (
   name string as (value:name::string),
   type string as (value:type::string),
   description string as (value:description::string),
-  price int as ((value:price::float * 100)::int)
+  price int as (value:price::int)
 )
 with location = @s3_stage/products
 file_format = ( type = parquet );
