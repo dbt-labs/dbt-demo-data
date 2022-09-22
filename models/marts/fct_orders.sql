@@ -25,6 +25,12 @@ locations as (
 
 ),
 
+supplies as (
+
+    select * from {{ ref('stg_supplies') }}
+
+),
+
 order_items_summary as (
 
     select
@@ -44,6 +50,19 @@ order_items_summary as (
 
 ),
 
+order_supplies_summary as (
+
+    select
+        order_id,
+
+        sum(supplies.supply_cost) as order_cost
+
+    from order_items
+    join supplies using (product_id)
+    group by 1
+
+),
+
 joined as (
 
     select
@@ -57,6 +76,8 @@ joined as (
         order_items_summary.subtotal_food_items,
         order_items_summary.subtotal,
 
+        order_supplies_summary.order_cost,
+
         -- rank this order for the customer
         row_number() over (
             partition by orders.customer_id
@@ -67,6 +88,7 @@ joined as (
 
     from orders
     join order_items_summary using (order_id)
+    join order_supplies_summary using (order_id)
     join locations using (location_id)
 
 ),
