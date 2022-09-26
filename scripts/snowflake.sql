@@ -97,6 +97,19 @@ create or replace external table products (
 with location = @s3_stage/products
 file_format = ( type = parquet );
 
+---------------------------------------------------------------------
+-- Supplies
+---------------------------------------------------------------------
+
+create or replace external table supplies (
+  id string as  (value:id::string),
+  name string as (value:name::string),
+  cost int as (value:cost::int),
+  perishable boolean as (value:type::boolean),
+  sku string as (value:sku::string)
+)
+with location = @s3_stage/supplies
+file_format = ( type = parquet );
 
 ---------------------------------------------------------------------
 -- Commit the transaction

@@ -20,3 +20,5 @@ sources:
         description: One record per physical store location
       - name: products
         description: One record per SKU for items sold in stores
+      - name: supplies
+        description: One record per supply per SKU of items sold in stores
