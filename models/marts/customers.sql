@@ -1,7 +1,7 @@
 
-{{ config(materialized='table') }}
+with
 
-with customers as (
+customers as (
 
     select * from {{ ref('stg_customers') }}
 
@@ -9,7 +9,7 @@ with customers as (
 
 orders as (
 
-    select * from {{ ref('fct_orders') }}
+    select * from {{ ref('orders') }}
 
 ),
 
