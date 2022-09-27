@@ -105,7 +105,7 @@ create or replace external table supplies (
   id string as  (value:id::string),
   name string as (value:name::string),
   cost int as (value:cost::int),
-  perishable boolean as (value:type::boolean),
+  perishable boolean as (value:perishable::boolean),
   sku string as (value:sku::string)
 )
 with location = @s3_stage/supplies
