@@ -3,19 +3,19 @@ version: 2
 
 models:
   - name: customers
-    description: TODO
+    description: Customer overview data mart, offering key details for each unique customer. One row per customer.
     columns:
       - name: customer_id
-        description: TODO
+        description: The unique key of the orders mart.
         tests:
           - not_null
           - unique
 
   - name: orders
-    description: TODO
+    description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.
     columns:
       - name: order_id
-        description: TODO
+        description: The unique key of the orders mart.
         tests:
           - not_null
           - unique

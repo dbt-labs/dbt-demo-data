@@ -5,7 +5,7 @@ source as (
 
     select * from {{ source('ecommerce', 'orders') }}
 
-    --- truncate timespan to desired range, current time as default
+    --- data runs to 2026, truncate timespan to desired range, current time as default
     where ordered_at <= {{ var('truncate_timespan_to') }}
 
 ),
