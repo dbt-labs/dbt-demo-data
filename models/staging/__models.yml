@@ -1,0 +1,57 @@
+
+version: 2
+
+models:
+  - name: stg_customers
+    description: TODO
+    columns:
+      - name: customer_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_locations
+    description: TODO
+    columns:
+      - name: location_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_order_items
+    description: TODO
+    columns:
+      - name: order_item_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_orders
+    description: TODO
+    columns:
+      - name: order_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_products
+    description: TODO
+    columns:
+      - name: product_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_supplies
+    description: TODO
+    columns:
+      - name: supply_uuid
+        description: TODO
+        tests:
+          - not_null
+          - unique

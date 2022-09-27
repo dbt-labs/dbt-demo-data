@@ -4,7 +4,7 @@ version: 2
 metrics:
   - name: revenue
     label: Revenue
-    model: ref('fct_orders')
+    model: ref('orders')
     description: "Income from all orders less tax"
 
     type: sum
@@ -19,7 +19,7 @@ metrics:
 
   - name: customers
     label: Customers
-    model: ref('fct_orders')
+    model: ref('orders')
     description: "Number of customers with a sale"
 
     type: count_distinct
@@ -33,7 +33,7 @@ metrics:
 
   - name: expenses
     label: Expenses
-    model: ref('fct_orders')
+    model: ref('orders')
     description: "Total expenses per order"
 
     type: sum

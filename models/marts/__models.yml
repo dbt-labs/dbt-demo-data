@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: customers
+    description: TODO
+    columns:
+      - name: customer_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
+
+  - name: orders
+    description: TODO
+    columns:
+      - name: order_id
+        description: TODO
+        tests:
+          - not_null
+          - unique
