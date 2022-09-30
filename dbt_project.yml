@@ -20,7 +20,8 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 vars:
-  truncate_timespan_to: "{{ dbt_utils.current_timestamp() }}"
+  truncate_timespan_to: "{{ dbt.current_timestamp() }}"
+  s3_bucket: "s3://dbt-demo-data-2022/jaffle-shop"
 
 models:
   demo_data:
