@@ -16,12 +16,12 @@ renamed as (
 
         ----------  ids
         id as order_id,
-        location_id,
-        customer_id,
+        store_id as location_id,
+        customer as customer_id,
 
         ---------- properties
-        (order_total / 100.0)::float as order_total,
-        (tax_paid / 100.0)::float as tax_paid,
+        cast(order_total / 100.0 as float) as order_total,
+        cast(tax_paid / 100.0 as float) as tax_paid,
 
         ---------- timestamps
         ordered_at
