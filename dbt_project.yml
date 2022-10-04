@@ -5,7 +5,7 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'demo_data'
+profile: 'snowflake'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
