@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 
 def model(dbt, session):
 
-    # MLflow control
+    # MLflow control TODO: move to a config file or something
     experiment_name = "/Users/cody.peterson@dbtlabs.com/demo"
     model_name = "dbt-databricks-demo"
     train_new_model = False
