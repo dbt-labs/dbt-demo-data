@@ -24,5 +24,29 @@ vars:
 
 models:
   demo_data:
+
+    # configure variables for use in models
+    suspected_personas: 5
+
+    +materialized: table
+
+    staging:
+      +docs:
+        node_color: "CadetBlue"
+
     marts:
-      +materialized: table
+      +docs:
+        node_color: "MediumSlateBlue"
+    
+    metrics:
+      +docs:
+        node_color: "Maroon"
+
+    challenges:
+      py:
+        +docs:
+          node_color: "Fuchsia"
+
+      sql:
+        +docs:
+          node_color: "DarkMagenta"

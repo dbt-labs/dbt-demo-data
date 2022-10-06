@@ -1,0 +1,8 @@
+selectors:
+  - name: default
+    default: true
+    definition:
+      method: fqn
+      value: "*"
+      exclude:
+        - unfuzzed_py
