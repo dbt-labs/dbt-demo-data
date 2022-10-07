@@ -1,10 +1,11 @@
+
 name: 'demo_data'
 
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'databricks'
+profile: 'demo_data'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -18,39 +19,11 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-# not working -- see https://github.com/dbt-labs/dbt-core/issues/5974
-#analyses:
-#  +docs:
-#    #show: false
-#    node_color: "black"
+vars:
+  truncate_timespan_to: "{{ dbt.current_timestamp() }}"
+  s3_bucket: "s3://dbt-demo-data-2022/jaffle-shop"
 
 models:
   demo_data:
-    +materialized: table
-
-    staging:
-      +docs:
-        node_color: "CadetBlue"
-
     marts:
-      +docs:
-        node_color: "MediumSlateBlue"
-      #orders_py:
-      #  +docs:
-      #    node_color: "BlueViolet"
-
-    data_for_ml:
-      +docs:
-        node_color: "Fuchsia"
-
-      # probably unused for dbx demo, but useful for our Coalesce talk
-      py:
-        +docs:
-          node_color: "Fuchsia"
-      sql:
-        +docs:
-          node_color: "DarkMagenta"
-
-vars:
-  truncate_timespan_to: "{{ dbt_utils.current_timestamp() }}"
-  s3_bucket: "s3://dbt-demo-data-2022/jaffle-shop"
+      +materialized: table
