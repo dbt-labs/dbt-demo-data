@@ -4,26 +4,34 @@ import mlflow
 import pyspark.pandas as ps
 
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 
 
 def model(dbt, session):
 
     # MLflow control TODO: move to a config file or something
-    model_name = "dbt-databricks-cluster-demo"
-    experiment_name = f"/Shared/{model_name}"
-    train_new_model = True
-    register_model = train_new_model and True
-
-    # get variables
-    n_clusters = dbt.config.get("suspected_personas")
+    experiment_name = "/Users/cody.peterson@dbtlabs.com/demo"
+    model_name = "dbt-databricks-demo"
+    train_new_model = False
+    register_model = train_new_model and False
 
     # get upstream data
-    orders_with_subtotals = dbt.ref("pivot_py").pandas_api()
+    orders_with_subtotals = dbt.ref("orders_with_subtotals").pandas_api()
 
     # drop non-numeric columns TODO: programmatic?
-    X = orders_with_subtotals.select_dtypes(
-        include=["float32", "float64", "int64"]
-    ).to_numpy()
+    X = orders_with_subtotals.drop(
+        columns=[
+            "order_id",
+            "location_id",
+            "customer_id",
+            "ordered_at",
+            "location_name",
+            "is_first_order",
+            "is_food_order",
+            "is_drink_order",
+        ],
+        axis=1,
+    )
 
     if train_new_model:
         # log ML stuff
@@ -32,8 +40,8 @@ def model(dbt, session):
         mlflow.autolog()
 
         # train model
-        kmeans = KMeans(n_clusters=n_clusters)
-        model = kmeans.fit(X)
+        kmeans = KMeans(n_clusters=5)
+        model = kmeans.fit(X.to_numpy())
 
         if register_model:
             # register ML model
@@ -47,7 +55,7 @@ def model(dbt, session):
         model = mlflow.pyfunc.load_model(model_uri)
 
     # score model
-    cluster_labels = model.predict(X)
+    cluster_labels = model.predict(X.to_numpy())
 
     # add cluster labels to orders_with_subtotals
     temp = ps.DataFrame(data=cluster_labels)

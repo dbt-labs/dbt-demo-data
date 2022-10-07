@@ -25,12 +25,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 #    node_color: "black"
 
 models:
-
   demo_data:
-
-    # configure variables for use in models
-    suspected_personas: 5
-
     +materialized: table
 
     staging:
@@ -40,16 +35,18 @@ models:
     marts:
       +docs:
         node_color: "MediumSlateBlue"
-    
-    metrics:
-      +docs:
-        node_color: "Maroon"
+      #orders_py:
+      #  +docs:
+      #    node_color: "BlueViolet"
 
-    challenges:
+    data_for_ml:
+      +docs:
+        node_color: "Fuchsia"
+
+      # probably unused for dbx demo, but useful for our Coalesce talk
       py:
         +docs:
           node_color: "Fuchsia"
-
       sql:
         +docs:
           node_color: "DarkMagenta"
