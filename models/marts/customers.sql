@@ -27,6 +27,7 @@ order_summary as (
         sum(order_total) as lifetime_spend
 
     from orders
+
     group by 1
 
 ),
