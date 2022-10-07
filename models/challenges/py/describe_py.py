@@ -1,16 +1,12 @@
-#imports
-import pyspark.pandas as ps
-
-
 def model(dbt, session):
 
     # get upstream data
     orders = dbt.ref("orders").pandas_api()
 
-    # describe data
+    # describe the data
     described = orders.describe()
 
-    # insert index as the first column named metrics
+    # insert the index as the first
     described.insert(0, "metric", described.index)
 
     return described
