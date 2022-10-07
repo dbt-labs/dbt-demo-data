@@ -1,4 +1,7 @@
 /*
+
+    TODO: rework per unfuzz_py.py
+
     Map each customer with a likely match, to the lowest ID among matches.
     Returns four columns:
         - original_id

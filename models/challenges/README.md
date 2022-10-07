@@ -47,8 +47,9 @@ Our employees manually enter customer names. Sometimes they make typos. Sometime
 Solutions:
 
 - [py/fuzz_py.py](py/fuzz_py.py) and [py/unfuzz_py.py](py/unfuzz_py.py)
+- [sql/unfuzz_sql.sql]
 
-The first model fuzzes up the customer names from orders and the second unfuzzes them using the known customers.
+The first Python model fuzzes up the customer names from orders and the second unfuzzes them using the known customers. The SQL model uses the first Python model and does the same thing as the second.
 
 **Important**: the `unfuzz_py` model is very slow and excluded from the [default selector](../../selectors.yml).
 
