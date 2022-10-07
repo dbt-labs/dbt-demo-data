@@ -5,38 +5,20 @@ sources:
   - name: ecommerce
     description: E-commerce data
 
-    #database: '{{ env_var("DBT_DEMO_DATABASE", "DBT_DEMO_DATA") }}'
-    schema: '{{ env_var("DBT_DEMO_SCHEMA", "ecommerce") }}'
+    database: '{{ env_var("DBT_DEMO_DATABASE", "DBT_DEMO_DATA") }}'
+    schema: '{{ env_var("DBT_DEMO_SCHEMA", "ECOMMERCE") }}'
     loader: manual
 
     tables:
       - name: customers
         description: One record per person who has purchased one or more items
-        external:
-          location: "{{ var('s3_bucket') }}/customers"
-          using: parquet
       - name: orders
         description: One record per order (consisting of one or more order items)
-        external:
-          location: "{{ var('s3_bucket') }}/orders"
-          using: parquet
       - name: order_items
         description: Items included in an order
-        external:
-          location: "{{ var('s3_bucket') }}/order_items"
-          using: parquet
       - name: locations
         description: One record per physical store location
-        external:
-          location: "{{ var('s3_bucket') }}/locations"
-          using: parquet
       - name: products
         description: One record per SKU for items sold in stores
-        external:
-          location: "{{ var('s3_bucket') }}/products"
-          using: parquet
       - name: supplies
         description: One record per supply per SKU of items sold in stores
-        external:
-          location: "{{ var('s3_bucket') }}/supplies"
-          using: parquet
