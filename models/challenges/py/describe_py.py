@@ -1,7 +1,7 @@
 def model(dbt, session):
 
     # get upstream data
-    orders = dbt.ref("orders").pandas_api()
+    orders = dbt.ref("orders").to_pandas_on_spark()
 
     # describe the data
     described = orders.describe()
