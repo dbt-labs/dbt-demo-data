@@ -4,6 +4,12 @@ We believe using SQL and Python together in a dbt project -- using the best tool
 
 This directory is split into `sql/` and `py/` subdirectories with the models for each challenges. We can't reuse the same model names, so `_sql` and `_py` are postfixed on the model names respectively. The main reason for still separating into subdirectories is easier configuration in `dbt_project.yml` for node colors.
 
+This generates the following DAG for sources, models, and metrics used in the challenges:
+
+![DAG](etc/DAG.png)
+
+TODO: update screenshot after finalizing `fuzz_sql` model.
+
 ## Challenges
 
 The challenges are listed below. Local prototypes for solutions in a Python notebook (+the visualizations for the ML stuff) can be found in [py/Untitled.ipynb](py/Untitled.ipynb).
@@ -40,9 +46,11 @@ Our employees manually enter customer names. Sometimes they make typos. Sometime
 
 Solutions:
 
-- [py/unfuzz_py.py](py/unfuzz_py.py)
+- [py/fuzz_py.py](py/fuzz_py.py) and [py/unfuzz_py.py](py/unfuzz_py.py)
 
-**Important**: this isn't exactly working.
+The first model fuzzes up the customer names from orders and the second unfuzzes them using the known customers.
+
+**Important**: the `unfuzz_py` model is very slow and excluded from the [default selector](../../selectors.yml).
 
 ### cluster: segment customers into potentially useful groups given their order history
 
@@ -62,4 +70,4 @@ Solutions:
 
 - [py/forecast_train_py.py](py/forecast_train_py.py) and [py/forecast_score_py.py](py/forecast_score_py.py)
 
-Two models are used to persist the ML models. This is hacky and not the intended UX of dbt, but works for now. See [py/Untitled.ipynb](py/Untitled.ipynb) for more visualization.
+The first model trains a ML model per location_id and stores it in a table and the second loads the ML models back in and stores its predictions into the future. See [py/Untitled.ipynb](py/Untitled.ipynb) for visualization.
