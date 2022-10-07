@@ -49,7 +49,6 @@ file_format = ( type = parquet );
 
 create or replace external table orders (
   id string as  (value:id::string), 
-  -- why rename these here, rather than in the staging model? :(
   location_id string as (value:store_id::string),
   customer_id string as (value:customer::string),
   ordered_at timestamp as (value:ordered_at::timestamp),
