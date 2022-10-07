@@ -18,13 +18,9 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-# not working -- see https://github.com/dbt-labs/dbt-core/issues/5974
-#analyses:
-#  +docs:
-#    #show: false
-#    node_color: "black"
-
 models:
+
+  +cluster_id: 0930-015510-ur6hdc0p
 
   demo_data:
 
