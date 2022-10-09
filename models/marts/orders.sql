@@ -1,7 +1,7 @@
 
 with
 
-unfuzzed as (
+orders as (
 
     select 
         location_id,
@@ -17,20 +17,6 @@ unfuzzed as (
 
     from {{ ref('unfuzz_sql') }}
 
-),
-
--- whoops
-orders as (
-    
-    select
-        *
-    from (
-        select
-            *,
-            row_number() over (partition by order_id order by match_likelihood desc) as rn
-        from unfuzzed
-    )
-    where rn = 1
 ),
 
 order_items as (

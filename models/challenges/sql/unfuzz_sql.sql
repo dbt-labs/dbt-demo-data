@@ -1,28 +1,5 @@
 /*
-
-    TODO: needs updating
-
-    Map each customer with a likely match, to the lowest ID among matches.
-    Returns four columns:
-        - original_id
-        - original_name
-        - map_to_id
-        - map_to_name
-    
-    Using this approach, there's still a risk of missing a multi-step match
-    E.g. Let's say we have three names, in ascending order by ID: "Stacy Mater", "Stacey Mater", and "Stacey Mater"
-    We'd map Stacey to Stacy, but we'd still be mapping Stacee to Stacey
-    We can add an additional mapping step (self-join / recursive CTE) to resolve.
-    For now, we could add a test for this: check if one row's map_to_id == original_id in another row:
-      {#
-          with fuzzy_matches as (
-              select * from {{ ref('unfuzzed_sql') }}
-          )
-          
-          select * from fuzzy_matches a
-          cross join fuzzy_matches b
-          where a.map_to_id = b.original_id
-      #}
+    TODO: document logic
 */
 
 with customer_names as (
@@ -36,6 +13,14 @@ with customer_names as (
         
 ),
 
+orders as (
+
+    select
+        *
+    from {{ ref('int_orders') }}
+),
+
+
 order_names as (
 
     select
@@ -43,9 +28,9 @@ order_names as (
         order_id as id,
         customer_name as name
     
-    from {{ ref('int_orders') }}
+    from orders
     -- limit this for quicker development
-    --limit 100 offset 12000
+    --limit 100 offset 100
 
 ),
 
@@ -85,13 +70,6 @@ matches as (
 
 ),
 
-orders as (
-
-    select
-        *
-    from {{ ref('int_orders') }}
-),
-
 final as (
 
     select
@@ -103,26 +81,20 @@ final as (
     left join matches 
     on orders.order_id = matches.id_a
 
+
+),
+
+final_filtered as(
+    
+    select
+        *
+    from (
+        select
+            *,
+            row_number() over (partition by order_id order by match_likelihood desc) as rn
+        from final
+    )
+    where rn = 1
 )
 
-select * from final
-
-/*
-dedupe as (
-
-    select distinct
-    
-        -- for each id/name combo where we've detected a positive match
-        id_b as original_id,
-        name_b as original_name,
-        -- let's map to the lowest id of all possible matches
-        min(id_a) over (partition by id_b) as map_to_id,
-        first_value(name_a) over (partition by id_b order by id_a) as map_to_name
-    
-    from matches
-
-)
-
-select * from dedupe
---order by original_name
-*/
+select * from final_filtered
