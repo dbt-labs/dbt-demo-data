@@ -11,13 +11,10 @@ def model(dbt, session):
     # dbt configuration
     dbt.config(materialized="incremental", packages=["pandas", "prophet"])
 
-    # use current time as index
-    trained_at = datetime.now()
-
     # get upstream data
     revenue = dbt.ref("revenue_weekly_by_location").to_pandas()
 
-    # rename to match prophet's expected column names
+    # rename to match Prophet's expected column names
     renames = {
         "date_week".upper(): "ds",
         "location_name".upper(): "location",
@@ -34,7 +31,10 @@ def model(dbt, session):
         for location in locations
     ]
 
-    # persist models
+    # use current time to "version" models
+    trained_at = datetime.now()
+
+    # persist models -- serialize Prophet as JSON via provided method
     df = pd.DataFrame(
         {
             "trained_at": [trained_at] * len(locations),

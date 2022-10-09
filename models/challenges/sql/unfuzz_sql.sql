@@ -1,6 +1,6 @@
 /*
 
-    TODO: rework per unfuzz_py.py
+    TODO: needs updating
 
     Map each customer with a likely match, to the lowest ID among matches.
     Returns four columns:
@@ -25,37 +25,28 @@
       #}
 */
 
-with all_names as (
+with customer_names as (
 
-        
         -- full demo dataset
         select
             customer_id as id,
             customer_name as name
         
-        from {{ ref('stg_customers') }}
+        from {{ ref('int_customers') }}
         
-        /*
-        -- tiny test dataset for iterative SQL development
-        select 1 as id, 'Cody Peterson' as name  union all
-        select 2,       'Cody Pederson'          union all
-        select 3,       'Codey Peterson'         union all
-        select 4,       'Cody P'                 union all
-        select 5,       'CodyPeterson'           union all
-        select 6,       'Jeremy Cohen'           union all
-        select 7,       'Jerco'                  union all
-        select 8,       'JerCo'                  union all
-        select 9,       'Jeremey Cohen'          union all
-        select 10,      'Jérémy Cohen'
-        */
+),
+
+order_names as (
+
+    select
+
+        order_id as id,
+        customer_name as name
     
-        /*
-        -- example for limitation discussed above
-        select 1 as id, 'Stacy Mater' as name  union all
-        select 2,       'Stacey Mater' union all
-        select 3,       'Stacee Mater'
-        */
-    
+    from {{ ref('int_orders') }}
+    -- limit this for quicker development
+    --limit 100 offset 12000
+
 ),
 
 cross_joined as (
@@ -73,23 +64,50 @@ cross_joined as (
         -- https://stackoverflow.com/questions/14260126/how-python-levenshtein-ratio-is-computed
         (1 - levenshtein_distance/max_length) as levenshtein_ratio
     
-    from all_names a
-    cross join all_names b
-    -- don't compare to self, and only compare in one order (lesser id < greater id) to avoid inverted dupes
-    where a.id < b.id
+    from order_names a
+    cross join customer_names b
 
 ),
 
 matches as (
 
-    select id_a, name_a, id_b, name_b
+    select 
+        id_a,
+        name_a, 
+        id_b, 
+        name_b,
+        levenshtein_ratio as match_likelihood
     from cross_joined
     -- bump this number for fewer positive matches (both true positives & false positives)
     -- i.e. the higher the ratio, the more specific & the less sensitive
-    where levenshtein_ratio >= 0.9
+    where levenshtein_ratio >= 0.50
+    order by id_a, match_likelihood desc
 
 ),
 
+orders as (
+
+    select
+        *
+    from {{ ref('int_orders') }}
+),
+
+final as (
+
+    select
+        orders.*,
+        matches.id_b as customer_id_match,
+        matches.name_b as customer_name_match,
+        matches.match_likelihood as match_likelihood
+    from orders
+    left join matches 
+    on orders.order_id = matches.id_a
+
+)
+
+select * from final
+
+/*
 dedupe as (
 
     select distinct
@@ -107,3 +125,4 @@ dedupe as (
 
 select * from dedupe
 --order by original_name
+*/

@@ -41,7 +41,7 @@ models:
         tests:
           - not_null
           - unique
-      - name: customer_id
+      - name: customer_id_match
         description: The foreign key relating to the customer who placed the order.
         tests:
           - relationships:

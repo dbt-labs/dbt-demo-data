@@ -47,7 +47,7 @@ Our employees manually enter customer names. Sometimes they make typos. Sometime
 Solutions:
 
 - [py/fuzz_py.py](py/fuzz_py.py) and [py/unfuzz_py.py](py/unfuzz_py.py)
-- [sql/unfuzz_sql.sql]
+- [sql/unfuzz_sql.sql](sql/unfuzz_sql.sql)
 
 The first Python model fuzzes up the customer names from orders and the second unfuzzes them using the known customers. The SQL model uses the first Python model and does the same thing as the second.
 
@@ -71,4 +71,4 @@ Solutions:
 
 - [py/forecast_train_py.py](py/forecast_train_py.py) and [py/forecast_score_py.py](py/forecast_score_py.py)
 
-The first model trains a ML model per location_id and stores it in a table and the second loads the ML models back in and stores its predictions into the future. See [py/Untitled.ipynb](py/Untitled.ipynb) for visualization.
+The first model trains a ML model per location_id and stores it in a table and the second loads the ML models back in and stores its predictions into the future. See [Untitled.ipynb](Untitled.ipynb) for visualization.

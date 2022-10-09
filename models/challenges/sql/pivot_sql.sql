@@ -40,7 +40,7 @@ pivoted as (
     
         order_id,
         location_id,
-        customer_id,
+        customer_id_match,
         order_total,
         tax_paid,
         ordered_at,

@@ -12,17 +12,22 @@ def model(dbt, session):
     dbt.config(packages=["fuzzywuzzy"])
 
     # get upstream data
-    customers = dbt.ref("customers").to_pandas()
-    fuzzed = dbt.ref("fuzz_py").to_pandas()
+    customers = dbt.ref("int_customers").to_pandas()
+    orders = dbt.ref("int_orders").to_pandas()
 
-    customer_names = sorted(list(customers["customer_name".upper()].unique()))
+    # take a sample, otherwise this can take days...
+    unfuzzed = orders.sample(100)
+
+    # get list of possible matches
+    names = sorted(list(customers["customer_name".upper()].unique()))
 
     # match customer names to unfuzz
-    fuzzed["customer_name_unfuzzed".upper()] = fuzzed[
-        "customer_name_fuzzed".upper()
-    ].apply(lambda x: match_str(x, customer_names)[0])
-
-    # add in the matched customer names
-    unfuzzed = fuzzed
+    unfuzzed[
+        ["customer_name_match".upper(), "match_likelihood".upper()]
+    ] = unfuzzed.apply(
+        lambda x: match_str(x["customer_name".upper()], names),
+        axis=1,
+        result_type="expand",
+    )
 
     return unfuzzed

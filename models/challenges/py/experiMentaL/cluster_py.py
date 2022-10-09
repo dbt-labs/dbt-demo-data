@@ -1,5 +1,6 @@
 import pandas as pd
 
+from random import random
 from sklearn.cluster import KMeans
 
 
@@ -12,12 +13,14 @@ def model(dbt, session):
     n_clusters = dbt.config.get("suspected_personas")
 
     # get upstream data
-    orders_with_subtotals = dbt.ref("pivot_py").to_pandas()
+    orders_with_subtotals = (
+        dbt.ref("pivot_sql").to_pandas()
+        if random() < 0.5
+        else dbt.ref("pivot_py").to_pandas()
+    )
 
     # feature engineering
-    df = orders_with_subtotals
-    # drop non-numeric columns programmatically
-    X = df.select_dtypes(include=["number"]).values
+    X = orders_with_subtotals.select_dtypes(include=["number"]).fillna(0).values
 
     # train the ML model
     model = KMeans(n_clusters=n_clusters)

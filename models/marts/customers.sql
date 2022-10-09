@@ -3,7 +3,7 @@ with
 
 customers as (
 
-    select * from {{ ref('stg_customers') }}
+    select * from {{ ref('int_customers') }}
 
 ),
 
@@ -16,7 +16,7 @@ orders as (
 order_summary as (
 
     select
-        customer_id,
+        customer_id_match,
 
         count(*) as count_lifetime_orders,
         count(*) > 1 as is_repeat_buyer,
@@ -47,7 +47,8 @@ joined as (
         end as customer_type
 
     from customers
-    join order_summary using (customer_id)
+    join order_summary
+    on customers.customer_id = order_summary.customer_id_match
 
 )
 

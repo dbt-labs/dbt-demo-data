@@ -1,6 +1,6 @@
 # did you know you can do this?
 # now you do!
-# we exclude furiously slow models from the default selector for this demo
+# we exclude slow models from the default selector for this demo
 selectors:
   - name: default
     default: true
@@ -8,5 +8,6 @@ selectors:
       method: fqn
       value: "*"
       exclude:
-        #- fuzz_py # this one is fast
-        - unfuzz_py # this one takes a long time
+        - unfuzz_sql
+      #  - pivot_py
+      #  - cluster_py

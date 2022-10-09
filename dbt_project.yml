@@ -31,6 +31,10 @@ models:
       +docs:
         node_color: "CadetBlue"
 
+    intermediate:
+      +docs:
+        node_color: "MediumBlue"
+
     marts:
       +docs:
         node_color: "MediumSlateBlue"
@@ -42,7 +46,10 @@ models:
     challenges:
       py:
         +docs:
-          node_color: "Fuchsia"
+          node_color: "Indigo"
+        experiMentaL:
+          +docs:
+            node_color: "Orchid"
 
       sql:
         +docs:
