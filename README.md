@@ -6,7 +6,11 @@ This repository contains a demo of dbt Python models Snowflake via Snowpark for 
 
 Python, node colors, metrics -- in a gif!
 
-![etc/py_gif](etc/py_gif.gif)
+![py_gif](etc/py_gif.gif)
+
+## Cool DAG
+
+![DAG](etc/dag.gif)
 
 ## Setup
 

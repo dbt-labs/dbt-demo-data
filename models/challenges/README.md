@@ -4,12 +4,6 @@ We believe using SQL and Python together in a dbt project -- using the best tool
 
 This directory is split into `sql/` and `py/` subdirectories with the models for each challenges. We can't reuse the same model names, so `_sql` and `_py` are postfixed on the model names respectively. The main reason for still separating into subdirectories is easier configuration in `dbt_project.yml` for node colors.
 
-This generates the following DAG for sources, models, and metrics used in the challenges:
-
-![DAG](etc/DAG.png)
-
-TODO: update screenshot after finalizing `fuzz_sql` model.
-
 ## Challenges
 
 The challenges are listed below. Local prototypes for solutions in a Python notebook (+the visualizations for the ML stuff) can be found in [py/Untitled.ipynb](py/Untitled.ipynb).
