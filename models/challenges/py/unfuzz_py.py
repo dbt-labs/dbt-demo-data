@@ -1,8 +1,8 @@
 # TODO: update to thefuzz
 try:
-    from thefuzz.process import extractOne as match_str
+    from thefuzz.process import extractOne
 except:
-    from fuzzywuzzy.process import extractOne as match_str
+    from fuzzywuzzy.process import extractOne
 
 
 def model(dbt, session):
@@ -25,7 +25,7 @@ def model(dbt, session):
     unfuzzed[
         ["customer_name_match".upper(), "match_likelihood".upper()]
     ] = unfuzzed.apply(
-        lambda x: match_str(x["customer_name".upper()], names),
+        lambda x: extractOne(x["customer_name".upper()], names),
         axis=1,
         result_type="expand",
     )
