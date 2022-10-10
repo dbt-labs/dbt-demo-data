@@ -2,15 +2,15 @@
 
 This repository contains a demo of dbt Python models Snowflake via Snowpark for the Coalesce 2022 conference.
 
-## Cool gif
+## Cool gifs
 
-Python, node colors, metrics -- in a gif!
-
-![py_gif](etc/py_gif.gif)
-
-## Cool DAG
+What a cool DAG! Python and SQL side-by-side in dbt!
 
 ![DAG](etc/dag.gif)
+
+Python models in dbt Cloud!
+
+![py_gif](etc/py_gif.gif)
 
 ## Setup
 
