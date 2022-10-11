@@ -1,0 +1,6 @@
+version: 2
+
+analyses:
+  - name: analysis
+    docs:
+      node_color: "gray"
