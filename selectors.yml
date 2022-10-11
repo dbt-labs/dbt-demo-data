@@ -7,7 +7,7 @@ selectors:
     definition:
       method: fqn
       value: "*"
-      exclude:
-        - unfuzz_sql
+      #exclude:
+      #  - unfuzz_sql
       #  - pivot_py
       #  - cluster_py
