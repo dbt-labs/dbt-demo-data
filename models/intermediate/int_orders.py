@@ -2,23 +2,25 @@ from random import random, randint
 
 
 def model(dbt, session):
+    """
+    In our scenario for the purposes of this demo, we get the
+    customer_name column from a datacenter located on Mercury
+    subject to solar flares. The customer name is first heard by
+    our employee, who writes it down on a coffee cup. An AI-powered
+    camera 50 feet away reads the coffee cup and transcribes the
+    name into the database on Mercury.
+    """
 
     # get upstream data
     stg_orders = dbt.ref("stg_orders").to_pandas()
     int_customers = dbt.ref("int_customers").to_pandas()
 
-    # imagine instead of clean customer_ids in the orders,
-    # we only have the names written by our employees and
-    # recorded by our AI in the database. we want to match these
-    # to our known customers.
-    # to boost the exclusiveness of our shop, we strictly allow
-    # only one customer per name, regardless of location. this is
-    # our differentiator from the competition.
+    # swap customer_id with customer_name and prepare to fuzz
     int_orders = stg_orders.merge(int_customers, on="customer_id".upper()).drop(
         "customer_id".upper(), axis=1
     )
 
-    # names fuzzed by humans and AI
+    # names fuzzed by humans, AI, and solar flares
     int_orders["customer_name".upper()] = int_orders["customer_name".upper()].apply(
         lambda x: fuzz_name(x)
     )
@@ -62,7 +64,7 @@ def fuzz_name(name):
 
         if random() < 0.2:
             # a solar flare hit the datacenter in all regions,
-            # no multi-region resiliency could have saved it :(
+            # and we only bought single-planet resiliency.
             for char in name:
                 if random() < 0.3:
                     name = name.replace(char, chr(ord(char) + randint(-5, 5)))

@@ -1,3 +1,7 @@
+/*
+    A SQL test on a Python model!
+*/
+
 select
     *
 from {{ ref('describe_py') }}

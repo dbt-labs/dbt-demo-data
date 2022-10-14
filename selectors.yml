@@ -1,6 +1,4 @@
-# did you know you can do this?
-# now you do!
-# we exclude slow models from the default selector for this demo
+# exclude slow models from the default selector if needed
 selectors:
   - name: default
     default: true
@@ -9,5 +7,4 @@ selectors:
       value: "*"
       #exclude:
       #  - unfuzz_sql
-      #  - pivot_py
       #  - cluster_py

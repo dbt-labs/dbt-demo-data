@@ -1,4 +1,4 @@
-# `dbt-sql` vs `dbt-py` challenges!
+# `dbt-sql` ~~vs~~ *and* `dbt-py` challenges!
 
 We believe using SQL and Python together in a dbt project -- using the best tool for the job -- is the way to go. To do that, you need to understand when either language is better. There will be some subjectivity within the middle. Keep in mind the performance hit with Python models, which is expected to improve over time as the data platforms do but likely not reach that of SQL models.
 
@@ -6,7 +6,7 @@ This directory is split into `sql/` and `py/` subdirectories with the models for
 
 ## Challenges
 
-The challenges are listed below. Local prototypes for solutions in a Python notebook (+the visualizations for the ML stuff) can be found in [py/Untitled.ipynb](py/Untitled.ipynb).
+The challenges are listed below. Local prototypes for solutions in a Python notebook (+the visualizations for the ML stuff) can be found in [Untitled.ipynb](Untitled.ipynb).
 
 ### describe: describe orders
 
@@ -24,6 +24,10 @@ Solutions:
 
 - [py/describe_py.py](py/describe_py.py)
 - [sql/describe_sql.sql](sql/describe_sql.sql)
+
+Bonus:
+
+- write a [test](../../tests/describe_py_bounds.sql)
 
 ### pivot: add the subtotals for each product_id to orders
 

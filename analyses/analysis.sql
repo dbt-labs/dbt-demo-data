@@ -1,42 +1,29 @@
-select *
-from {{ ref('describe_py') }}
-;
+-- challenge 1: describe orders
 
-select *
-from {{ ref('describe_sql') }}
-;
+{{ preview(ref('describe_py')) }}
 
-select *
-from {{ ref('pivot_py') }}
-limit 10
-;
+{{ preview(ref('describe_sql')) }}
 
-select *
-from {{ ref('pivot_sql') }}
-limit 10
-;
+-- challenge 2: pivot product subtotals onto orders
 
-select *
-from {{ ref('unfuzz_py') }}
-limit 10
-;
+{{ preview(ref('pivot_py')) }}
 
-select *
-from {{ ref('unfuzz_sql') }}
-limit 10
-;
+{{ preview(ref('pivot_sql')) }}
 
-select *
-from {{ ref('cluster_py') }}
-limit 10
-;
+-- challenge 4: unfuzz customer names int_orders
 
-select *
-from {{ ref('forecast_train_py') }}
-limit 10
-;
+{{ preview(ref('unfuzz_py')) }}
 
-select *
-from {{ ref('forecast_score_py') }}
-limit 10
-;
+{{ preview(ref('unfuzz_sql')) }}
+
+-- use KMeans scikit-learn in Python to cluster orders
+
+{{ preview(ref('cluster_py')) }}
+
+-- use Prophet in Python to trian forecasting models for revenue
+
+{{ preview(ref('forecast_train_py')) }}
+
+-- use Prophet in Python to predict revenue
+
+{{ preview(ref('forecast_score_py')) }}

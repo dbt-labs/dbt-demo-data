@@ -1,3 +1,7 @@
+/*
+    Use a sum-case-when statement to get the 
+    subtotal in a given order for each product_id.
+*/
 
 with
 

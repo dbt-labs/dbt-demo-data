@@ -1,3 +1,11 @@
+/*
+    We compute a view statistics for each numeric column to match
+    describe() or summary() methods from Python dataframes.
+
+    Snowpark's .describe() returns min, max, and count for non-numeric
+    columns. NULLs are used for stddev and mean. TODO: Adapt this. 
+*/
+
 {% set ref_orders = ref('orders') %}
 
 with 
@@ -7,12 +15,6 @@ orders as (
     select * from {{ ref_orders }}
 
 ),
-
-{# TODO: 
-    Snowpark's .describe() returns min, max, and count for non-numeric
-    columns. NULLs are used for stddev and mean. We should adapt
-    this to behave the same. 
-#}
 
 described as (
 
@@ -50,8 +52,9 @@ described as (
 
 select * from described
 
-{#  -- adapated to match Snowpark API
-    -- keeping Pandas in this comment for reference
+{#  
+    -- adapated to match Snowpark describe API
+    -- keeping pandas in this comment for reference
 
     {% set stats = {
         'count': 'count(...)',

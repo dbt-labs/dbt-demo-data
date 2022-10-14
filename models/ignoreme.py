@@ -1,4 +1,4 @@
-# see the ../.dbtignore in the root of the repo -- this file is ignored!
+# see the .dbtignore file in the root of the repo -- this .py file is ignored by dbt parsing!
 # use this is you have `.py` files in models/ that aren't models, for some reason
 
 
