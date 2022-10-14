@@ -46,6 +46,10 @@ If you're a dbt Labs employee, you can skip this step -- the source data is alre
 
 Otherwise, run the [snowflake.sql](scripts/snowflake.sql) script through the Snowflake UI or locally via `snowsql`. This will create the ecommerce database and source tables from parquet files in S3. Modify the script as needed.
 
+### dbt deps
+
+Run `dbt deps`.
+
 ### Run or build
 
 Run individual models or build the entire project!
