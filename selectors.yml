@@ -7,5 +7,5 @@ selectors:
     definition:
       method: fqn
       value: "*"
-      exclude:
-        - unfuzz_py
+      #exclude:
+      #  - unfuzz_py
