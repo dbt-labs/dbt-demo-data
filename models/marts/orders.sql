@@ -10,13 +10,22 @@ orders as (
         tax_paid,
         -- issue with timestamps between pandas and Snowpark
         to_timestamp_ntz(ordered_at / 1000000) as ordered_at,
-        customer_name,
+        customer_name
+
+    from {{ ref('int_orders') }}
+
+),
+
+unfuzzed as (
+
+    select
+
+        order_id,
         customer_id_match,
         customer_name_match,
-        match_likelihood
+        levenshtein_ratio as match_likelihood
 
     from {{ ref('unfuzz_sql') }}
-
 ),
 
 order_items as (
@@ -40,6 +49,19 @@ locations as (
 supplies as (
 
     select * from {{ ref('stg_supplies') }}
+
+),
+
+orders_unfuzzed as (
+    
+    select
+        orders.*,
+        unfuzzed.customer_id_match,
+        unfuzzed.customer_name_match,
+        unfuzzed.match_likelihood
+
+    from orders
+    join unfuzzed using (order_id)
 
 ),
 
@@ -83,7 +105,7 @@ joined as (
 
     select
 
-        orders.*,
+        orders_unfuzzed.*,
 
         order_items_summary.count_food_items,
         order_items_summary.count_drink_items,
@@ -97,13 +119,13 @@ joined as (
 
         -- rank this order for the customer
         row_number() over (
-            partition by orders.customer_id_match
-            order by orders.ordered_at
+            partition by orders_unfuzzed.customer_id_match
+            order by orders_unfuzzed.ordered_at
         ) as customer_order_index,
 
         locations.location_name
 
-    from orders
+    from orders_unfuzzed
     join order_items_summary using (order_id)
     join order_supplies_summary using (order_id)
     join locations using (location_id)
