@@ -1,39 +1,39 @@
 -- challenge 1: describe orders
 
-{{ preview(ref('describe_py')) }}
+select * from {{ ref('describe_py') }} limit 10;
 
-{{ preview(ref('describe_sql')) }}
+select * from {{ ref('describe_sql') }} limit 10;
 
 -- challenge 2: pivot product subtotals onto orders
 
-{{ preview(ref('pivot_py')) }}
+select * from {{ ref('pivot_py') }} limit 10;
 
-{{ preview(ref('pivot_sql')) }}
+select * from {{ ref('pivot_sql') }} limit 10;
 
 -- challenge 3: unfuzz customer names int_orders
 
-{{ preview(ref('unfuzz_py')) }}
+select * from {{ ref('unfuzz_py') }} limit 10;
 
-{{ preview(ref('unfuzz_sql')) }}
+select * from {{ ref('unfuzz_sql') }} limit 10;
 
 -- use KMeans scikit-learn in Python to cluster orders
 
-{{ preview(ref('cluster_py')) }}
+select * from {{ ref('cluster_py') }} limit 10;
 
 -- use Prophet in Python to trian forecasting models for revenue
 
-{{ preview(ref('forecast_train_py')) }}
+select * from {{ ref('forecast_train_py') }} limit 10;
 
 -- use Prophet in Python to predict revenue
 
-{{ preview(ref('forecast_score_py')) }}
+select * from {{ ref('forecast_score_py') }} limit 10;
 
 -- other models
 
-{{ preview(ref('int_orders')) }}
+select * from {{ ref('int_orders') }} limit 10;
 
-{{ preview(ref('orders' )) }}
+select * from {{ ref('orders' ) }} limit 10;
 
-{{ preview(ref('customers')) }}
+select * from {{ ref('customers') }} limit 10;
 
-{{ preview(ref('revenue_weekly_by_location')) }}
+select * from {{ ref('revenue_weekly_by_location') }} limit 10;
