@@ -1,6 +1,6 @@
 # dbt Python models on Snowpark demo for Coalesce 2022
 
-This repository contains a demo of dbt Python models Snowflake via Snowpark for the Coalesce 2022 conference. It will not be actively maintained. See the repository it was forked from for a current version -- we will work to merge the Python models into the `main` branch there after Coalesce.
+This repository contains a demo of dbt Python models on Snowflake via Snowpark for the Coalesce 2022 conference. It will not be actively maintained. See the repository it was forked from for a current version -- we will work to merge the Python models into the `main` branch there after Coalesce.
 
 ## Cool gifs
 
