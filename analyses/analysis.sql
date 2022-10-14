@@ -10,7 +10,7 @@
 
 {{ preview(ref('pivot_sql')) }}
 
--- challenge 4: unfuzz customer names int_orders
+-- challenge 3: unfuzz customer names int_orders
 
 {{ preview(ref('unfuzz_py')) }}
 
@@ -27,3 +27,13 @@
 -- use Prophet in Python to predict revenue
 
 {{ preview(ref('forecast_score_py')) }}
+
+-- other models
+
+{{ preview(ref('int_orders')) }}
+
+{{ preview(ref('orders' )) }}
+
+{{ preview(ref('customers')) }}
+
+{{ preview(ref('revenue_weekly_by_location')) }}
