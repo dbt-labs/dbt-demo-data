@@ -20,8 +20,8 @@ renamed as (
         customer_id,
 
         ---------- properties
-        (order_total / 100.0)::float as order_total,
-        (tax_paid / 100.0)::float as tax_paid,
+        {{ cents_to_dollars('order_total', 2) }} as order_total,
+        {{ cents_to_dollars('tax_paid', 2) }} as tax_paid,
 
         ---------- timestamps
         ordered_at
