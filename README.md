@@ -59,4 +59,5 @@ _Not implemented_
 To run this project in dbt Cloud:
 - Make a fork of this repo in your own GitHub organization
 - Import your forked repository into dbt Cloud
+- Run `dbt deps` to install package dependencies 
 - Run a job in your dbt Cloud Deployment Environment with the command `dbt build`
