@@ -1,6 +1,6 @@
 -- test change from VS Code
 with 
-
+-- change 2 from VS Code
 source as (
 
     select * from {{ source('ecommerce', 'customers') }}
