@@ -1,6 +1,6 @@
 -- test change from VS Code
 with 
-
+-- change 1 from cloud IDE
 source as (
 
     select * from {{ source('ecommerce', 'customers') }}
