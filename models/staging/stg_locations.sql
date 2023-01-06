@@ -3,10 +3,10 @@ with
 
 source as (
 
-    select * from {{ source('ecommerce', 'locations') }}
+    select * from {{ ref('src_locations') }}
 
     --- data runs to 2026, truncate timespan to desired range, current time as default
-    where opened_at <= {{ var('truncate_timespan_to') }}
+    where opened <= {{ var('truncate_timespan_to') }}
 
 ),
 
@@ -19,10 +19,10 @@ renamed as (
 
         ---------- properties
         name as location_name,
-        tax_rate,
+        tax as tax_rate,
 
         ---------- timestamp
-        opened_at
+        opened as opened_at
 
     from source
 

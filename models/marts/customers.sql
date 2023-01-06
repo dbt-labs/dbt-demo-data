@@ -1,5 +1,5 @@
 
-with
+with recursive
 
 customers as (
 
@@ -7,7 +7,7 @@ customers as (
 
 ),
 
-orders as (
+orderss as (
 
     select * from {{ ref('orders') }}
 
@@ -26,7 +26,7 @@ order_summary as (
         sum(subtotal) as lifetime_spend_pretax,
         sum(order_total) as lifetime_spend
 
-    from orders
+    from orderss
     group by 1
 
 ),

@@ -1,0 +1,17 @@
+# python
+black
+ipython
+
+# dbt
+dbt-core
+dbt-duckdb
+
+# synthetic data
+Faker
+
+# pydata
+numpy
+pandas
+
+# ML
+scikit-learn

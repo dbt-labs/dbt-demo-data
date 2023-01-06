@@ -3,7 +3,7 @@ with
 
 source as (
 
-    select * from {{ source('ecommerce', 'products') }}
+    select * from {{ ref('src_products') }}
 
 ),
 

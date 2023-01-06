@@ -1,0 +1,9 @@
+# excude synthetic sources
+selectors:
+  - name: default
+    default: true
+    definition:
+      method: fqn
+      value: "*"
+      exclude:
+        - source

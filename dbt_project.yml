@@ -1,11 +1,11 @@
-
 name: 'demo_data'
 
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'demo_data'
+profile: 'local'
+#profile: 'snowflake'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -19,10 +19,47 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
 vars:
-  truncate_timespan_to: "{{ dbt_utils.current_timestamp() }}"
+  #truncate_timespan_to: "{{ dbt_utils.current_timestamp() }}"
+  #truncate_timespan_to: "{{ dbt_utils.pretty_time(format='%Y-%m-%d %H:%M:%S') }}"
+  truncate_timespan_to: "{{ dbt_utils.pretty_time(format='%Y-%m-%d') }}"
 
 models:
   demo_data:
+
+    source:
+      +materialized: table
+      +docs:
+        node_color: "black"
+
+    staging:
+      +docs:
+        node_color: "CadetBlue"
+
     marts:
       +materialized: table
+      +docs:
+        node_color: "MediumSlateBlue"
+    
+    metrics:
+      +materialized: table
+      +docs:
+        node_color: "Maroon"
+
+    ml:
+      +materialized: table
+      +docs:
+        #node_color: "DarkMagenta"
+
+tests:
+  +docs:
+    node_color: "grey"
+
+        #node_color: "Indigo"
+        #node_color: "Orchid"
+        #node_color: "MediumBlue"

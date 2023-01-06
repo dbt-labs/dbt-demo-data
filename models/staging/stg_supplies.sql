@@ -3,7 +3,7 @@ with
 
 source as (
 
-    select * from {{ source('ecommerce', 'supplies') }}
+    select * from {{ ref('src_supplies') }}
 
 ),
 
@@ -12,7 +12,7 @@ renamed as (
     select
 
         ----------  ids
-        {{ dbt_utils.surrogate_key(['id', 'sku']) }} as supply_uuid,
+        {{ dbt_utils.generate_surrogate_key(['id', 'sku']) }} as supply_uuid,
         id as supply_id,
         sku as product_id,
 

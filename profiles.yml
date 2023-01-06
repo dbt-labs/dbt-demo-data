@@ -1,0 +1,21 @@
+local:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: source.duckdb
+      threads: 8
+
+snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      authenticator: externalbrowser
+      account: ska67070
+      database: analytics
+      role: transformer
+      schema: dbt_cody
+      threads: 8
+      user: cody.peterson@fishtownanalytics.com
+      warehouse: transforming

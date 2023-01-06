@@ -3,10 +3,10 @@ with
 
 source as (
 
-    select * from {{ source('ecommerce', 'orders') }}
+    select * from {{ ref('src_orders') }}
 
     --- data runs to 2026, truncate timespan to desired range, current time as default
-    where ordered_at <= {{ var('truncate_timespan_to') }}
+    {#where ordered_at <= {{ var('truncate_timespan_to') }}#}
 
 ),
 
@@ -16,8 +16,8 @@ renamed as (
 
         ----------  ids
         id as order_id,
-        location_id,
-        customer_id,
+        store_id as location_id,
+        customer as customer_id,
 
         ---------- properties
         (order_total / 100.0)::float as order_total,
