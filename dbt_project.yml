@@ -26,3 +26,5 @@ models:
   demo_data:
     marts:
       +materialized: table
+      +docs:
+        node_color: "gold"
