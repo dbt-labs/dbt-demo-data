@@ -6,7 +6,7 @@ customers as (
     select * from {{ ref('stg_customers') }}
 
 ),
-
+-- asjdhfkldsjafdsajlk
 orders as (
 
     select * from {{ ref('orders') }}
