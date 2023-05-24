@@ -9,10 +9,10 @@ orders as (
  
 order_items as (
 
-    select * from {{ ref('stg_order_items') }}
+    select * from {{ ref('stg_orders') }}
 
 ),
-
+-- I am editing my code ajdsfkldsfjkldjfl
 products as (
 
     select * from {{ ref('stg_products') }}
