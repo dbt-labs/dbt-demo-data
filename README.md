@@ -1,9 +1,21 @@
+# ***Archival Notice***
+This repository has been archived.
+
+As a result all of its historical issues and PRs have been closed.
+
+Please *do not clone* this repo without understanding the risk in doing so:
+- It may have unaddressed security vulnerabilities
+- It may have unaddressed bugs
+
+<details>
+   <summary>Click for historical readme</summary>
+
 ## dbt demo data
 
 This repository contains demo data and a starter project intended
 for use with [dbt](www.getdbt.com).
 
-> :warning: **This repo is a work-in-progress**: Best to come back sometime soon :)
+&gt; :warning: **This repo is a work-in-progress**: Best to come back sometime soon :)
 
 
 ### Installing source data
@@ -61,3 +73,4 @@ To run this project in dbt Cloud:
 - Import your forked repository into dbt Cloud
 - Run `dbt deps` to install package dependencies 
 - Run a job in your dbt Cloud Deployment Environment with the command `dbt build`
+
